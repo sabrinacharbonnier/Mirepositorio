@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="165498360013-mrk1uo644jqcethvl42bmn1tjuavtn0e.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="Google/google.js"></script>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/login.css" rel="stylesheet">
+  <style>
+    html, body{
+      height: 100%;
+    }
+
+    body {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      padding-top: 30px;
+      padding-bottom: 40px;
+      background-color: royalblue;
+    }
+
+    .signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-85 p-b-20">
+				<form class="login100-form validate-form">
+					<span class="login100-form-avatar">
+						<img src="img/avatar-01.png" alt="AVATAR">
+					</span><br>
+          <span class="login100-form-title p-b-70">
+						E-mercado
+					</span>
+
+					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
+						<input class="input100" type="text" name="username" id="user">
+						<span class="focus-input100" data-placeholder="Usuario"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+						<input class="input100" type="password" name="pass" id="key"> 
+						<span class="focus-input100" data-placeholder="Contraseña"></span>
+					</div>
+
+          <div class="msj-imput100">
+          <span id="msj"></span><br>
+        </div>
+
+					<div class="container-login100-form-btn">
+						<button class="btn btn-primary" id="conectar" onclick="verificar()">
+							Iniciar sesión
+						</button>
+					</div>
+          <div class="g-signin2" data-onsuccess="onSignIn"></div>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+ 
+  
+  <script src="js/init.js"></script>
+  <script src="js/login.js"></script>
+  
+</body>
+</html>
