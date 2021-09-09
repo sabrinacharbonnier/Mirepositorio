@@ -13,8 +13,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
      <!-- Google -->
-     <script src="https://apis.google.com/js/platform.js?onload=onLoad?" async defer></script>
-     <script src="Google/google.js"></script>
+     <meta name="google-signin-client_id" content="165498360013-mrk1uo644jqcethvl42bmn1tjuavtn0e.apps.googleusercontent.com">   
   </head>
   <body>
     <nav class="site-header sticky-top py-1 bg-dark">
@@ -24,6 +23,7 @@
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
         <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+        <span class="py-2 d-none d-md-inline-block" id="nombre"></span>
       </div>
     </nav>
     <main role="main" class="pb-5">
@@ -31,6 +31,49 @@
         <h2>Productos</h2>
         <p class="lead">Verás aquí todas los productos del sitio</p>
       </div>
+      <div class="container">
+        <div class="row">
+            <div class="col text-right">
+                <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
+                    <label class="btn btn-light active" id="asc" onclick="ordenar('asc')">
+                        <input type="radio" value="options" autocomplete="off" ><i class="fas fa-sort-amount-up mr-1"></i>U$S
+                    </label>
+                    <label class="btn btn-light" id="des" onclick="ordenar('des')">
+                        <input type="radio" value="options" autocomplete="off" ><i class="fas fa-sort-amount-down mr-1"></i>U$S
+                    </label>
+                    <label class="btn btn-light" id="rel" onclick="ordenarRelevante('rel')">
+                        <input type="radio" value="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Relevancia
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col-md-6"></div>
+            <div class="col-md-6 col-sm-12 mb-1 container">
+              <div class="row container p-0 m-0"> 
+                <div class="col">
+                  <p class="font-weight-normal text-right my-2">Precio:</p>
+                </div>
+                <div class="col">
+                  <input class="form-control" type="number" placeholder="min." id="minimo">
+                </div>
+                <div class="col">
+                  <input class="form-control" type="number" placeholder="máx." id="maximo">
+                </div>
+                <div class="col-3 p-0">
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-light btn-block" id="rangeFilterCount" onclick="showProductsList()">Filtrar</button>
+                    <button class="btn btn-link btn-sm" id="clearRangeFilter" onclick="showProductsList()">Limpiar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="list-group" id="cat-list-container">
+            </div>
+        </div>
+    </div>
     <div class="container">
       <div class="row">
         <table class="list-group" id="productos"></table>
@@ -45,11 +88,18 @@
         <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
         <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
       </div>
+      <button class="btn btn-primary" id="desconectar" onclick="desconectar();">Cerrar sesión</button>
     </footer>
     <div id="spinner-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/products.js"></script>
+    <script src="js/logout.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <script>
+      let usuario = JSON.parse(localStorage.getItem("usuario"));
+      document.getElementById('nombre').innerHTML= "<img src=" + usuario.imagen + " width=30>  " + usuario.nombre;
+  </script>
   </body>
 </html>

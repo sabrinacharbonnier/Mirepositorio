@@ -13,6 +13,8 @@
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+     <!-- Google -->
+     <meta name="google-signin-client_id" content="165498360013-mrk1uo644jqcethvl42bmn1tjuavtn0e.apps.googleusercontent.com">
   </head>
   <body>
     <nav class="site-header sticky-top py-1 bg-dark">
@@ -22,6 +24,7 @@
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
         <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+        <span class="py-2 d-none d-md-inline-block" id="nombre"></span>
       </div>
     </nav>
     <main role="main" class="pb-5">
@@ -81,11 +84,18 @@
         <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
         <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
       </div>
+      <button class="btn btn-primary" id="desconectar" onclick="desconectar();">Cerrar sesión</button>
     </footer>
     <div id="spinner-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/categories.js"></script>
+    <script src="js/logout.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <script>
+      let usuario = JSON.parse(localStorage.getItem("usuario"));
+      document.getElementById('nombre').innerHTML= "<img src=" + usuario.imagen + " width=30>  " + usuario.nombre;
+  </script>
   </body>
 </html>
