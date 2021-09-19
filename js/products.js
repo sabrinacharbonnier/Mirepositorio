@@ -79,3 +79,9 @@ document.getElementById("clearRangeFilter").addEventListener("click", function()
 
     showProductsList();
 });
+
+//Redireccionar a la página de información del producto
+document.getElementById("info-productos").addEventListener("click", function(){
+    location.href = "product-info.html"
+});
+
