@@ -1,22 +1,24 @@
 let infoProductos = [];
 let mostrar = [];
+let relacionados = []; 
 
 //Muestra galería de imagenes
 function mostrarGaleriaProducto(array){
 
     let htmlContentToAppend = "";
-    for(let i = 0; i < array.length; i++){
-        let imageSrc = array[i];
-
         htmlContentToAppend += `
-        <div class="col-lg-3 col-md-4 col-6">
-            <div class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="` + imageSrc + `" alt="">
-            </div>
-        </div>
-        `
-        document.getElementById("GaleriaImagenes").innerHTML = htmlContentToAppend;
-    }
+            <div class="carousel-item active">
+                <img src="` + infoProductos.images[0] + `" class="d-block w-100" alt="...">
+            </div>`
+
+    for(let i = 1; i < array.length; i++){
+    let imageSrc = array[i];
+
+    htmlContentToAppend += `
+                <div class="carousel-item">
+                    <img src="` + infoProductos.images[i] + `" class="d-block w-100" alt="...">
+                </div>`   
+    }document.getElementById("GaleriaImagenes").innerHTML = htmlContentToAppend;
 }
 
 //Mostrar comentarios//
@@ -36,23 +38,41 @@ function mostrarComentarios(comentarios){
 }
 
 //función para calificar
-function calificar(num){//  num = 3
+function calificar(num){
   
     let estrellas = "";
 
-    for (let i=1; i<=5; i++){//         La puntuación máxima es de 5, así que... cuento hasta 5
+    for (let i=1; i<=5; i++){
 
-        if (i<=num ){ //Cuento y pregunto 
+        if (i<=num ){ 
 
-            estrellas += '<i class="fas fa-star "></i>';//Pongo una estrellita llena
+            estrellas += '<i class="fas fa-star "></i>';
             
         }else {
-            estrellas +='<i class="far fa-star "></i>';//Pongo el contorno
+            estrellas +='<i class="far fa-star "></i>';
         }
     }
     
 return estrellas;
 }
+
+//Funciona para mostrar productos relacionados//
+function mostrarRelacionados(array){
+    relacionados = "";
+    infoProductos.relatedProducts.forEach((relacionado) => {
+        relacionados +=`
+        <div class="col-lg-3 col-md-4 col-6">
+            <div class="justify-content-center">
+                <h5>${array[relacionado].name}</h5>
+                <img class="img-fluid img-thumbnail" src="` + array[relacionado].imgSrc + `" alt="">
+                <small class = "text">` + array[relacionado].description +`</small>
+
+            </div>
+        </div>`
+});
+document.getElementById("relatedProduct").innerHTML = relacionados;
+}
+
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
@@ -81,13 +101,17 @@ document.addEventListener("DOMContentLoaded", function(e){
             mostrarGaleriaProducto(infoProductos.images);
         }
     });
-});
+    getJSONData(PRODUCTS_URL).then(function(resultObj){
+        if (resultObj.status === "ok"){
+            relacionados = resultObj.data;
+            mostrarRelacionados(relacionados);
+        }
+    });
 
-    document.addEventListener("DOMContentLoaded", function (e) {
-        getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj){
-            if (resultObj.status === "ok"){
-                comentarios = resultObj.data;
-                mostrarComentarios(comentarios);
-            }
-        });
-});
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj){
+        if (resultObj.status === "ok"){
+            comentarios = resultObj.data;
+            mostrarComentarios(comentarios);
+        }
+    });
+});    

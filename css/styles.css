@@ -139,3 +139,9 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.carousel{
+  max-width: 600px;
+  max-height: 500px;
+  padding-left: 50px;
+}

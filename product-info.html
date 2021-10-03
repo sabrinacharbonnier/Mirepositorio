@@ -13,6 +13,12 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="css/dropdown.css" rel="stylesheet">
+  <!-- Boostrap icono -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <!-- Google -->
+  <meta name="google-signin-client_id" content="165498360013-mrk1uo644jqcethvl42bmn1tjuavtn0e.apps.googleusercontent.com">   
+
 </head>
 <body>
   <nav class="site-header sticky-top py-1 bg-dark">
@@ -21,7 +27,14 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+      <div class="dropdown">
+        <button class="dropbtn" id="nombre"></button>
+        <div class="dropdown-content">
+          <a href="cart.html"><i class="bi bi-cart3"></i> Mi carrito</a>
+          <a href="my-profile.html"><i class="bi bi-person-circle"></i> Mi perfil</a>
+          <a href="#" id="desconectar" onclick="desconectar();"><i class="bi bi-door-open"></i> Salir</a>
+        </div>
+      </div>
     </div>  
   </nav>
   <main role="main">
@@ -41,41 +54,49 @@
       <dd>
         <p id="productCat"></p>
       </dd>
-      <dt>Unidades vendidas:</dt>
-        <dd>
+      <dt><i class="fa-solid fa-cart-shopping"></i> Unidades vendidas:</dt>
           <p id="productSold"></p>
-        </dd>
       <dt><i class="far fa-images"></i> Imágenes ilustrativas</dt>
         <dd>
-          <div class="row text-center text-lg-left pt-2" id="GaleriaImagenes">
+          <div class="row text-center text-lg-left pt-2">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-interval="3000">
+              <div class="carousel-inner"id="GaleriaImagenes">
+              </div>
+            </div>
           </div>
         </dd>
+        <hr class="my-3">
+        <h6>Otros clientes también vieron</h6>
+        <dd>
+          <div class="row text-center text-lg-left pt-2" id="relatedProduct"></div>
+        </dd>
+        <hr class="my-3">
+        <div>
+          <h6>Comentarios de nuestros clientes</h6>
+          <p id="comentarios"></p>
+          <h7><i class="fa-solid fa-message"></i>Déjanos tu comentario<lottie-player src="https://assets6.lottiefiles.com/packages/lf20_dsoqb909.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop autoplay></lottie-player></h7>
+          <div class="form-group">
+            <textarea id="newComment" rows="2" cols="50" placeholder="Ingrese su comentario"></textarea> 
+            <span id="void-field"></span>
+          </div>
+          <form>
+            <p class="puntuacion"> 
+              <input id="radio1" type="radio" name="estrellas" value="5">
+              <label for="radio1"><i class="fa fa-star"></i></label>
+              <input id="radio2" type="radio" name="estrellas" value="4"> 
+              <label for="radio2"><i class="fa fa-star"></i></label>
+              <input id="radio3" type="radio" name="estrellas" value="3">
+              <label for="radio3"><i class="fa fa-star"></i></label>
+              <input id="radio4" type="radio" name="estrellas" value="2">
+              <label for="radio4"><i class="fa fa-star"></i></label>
+              <input id="radio5" type="radio" name="estrellas" value="1">
+              <label for="radio5"><i class="fa fa-star"></i></label>
+            </p>
+          </form>
+          <button class="btn btn-primary" id="addComment" onclick="agregarComentario()">Enviar comentario</button>
+        </div>
     </div>
-    <hr class="my-3">
-  <div>
-    <h5>Comentarios</h5>
-    <p id="comentarios"></p>
-    <h7><i class="fa-solid fa-message"></i> Añadir nuevo comentario<lottie-player src="https://assets6.lottiefiles.com/packages/lf20_dsoqb909.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop autoplay></lottie-player></h7>
-    <div class="form-group">
-      <textarea id="newComment" rows="2" cols="50" placeholder="Ingrese su comentario"></textarea> 
-      <span id="void-field"></span>
-    </div>
-    <form>
-      <p class="puntuacion"> 
-        <input id="radio1" type="radio" name="estrellas" value="5">
-        <label for="radio1"><i class="fa fa-star"></i></label>
-        <input id="radio2" type="radio" name="estrellas" value="4"> 
-        <label for="radio2"><i class="fa fa-star"></i></label>
-        <input id="radio3" type="radio" name="estrellas" value="3">
-        <label for="radio3"><i class="fa fa-star"></i></label>
-        <input id="radio4" type="radio" name="estrellas" value="2">
-        <label for="radio4"><i class="fa fa-star"></i></label>
-        <input id="radio5" type="radio" name="estrellas" value="1">
-        <label for="radio5"><i class="fa fa-star"></i></label>
-      </p>
-    </form>
-    <button class="btn btn-primary" id="addComment" onclick="agregarComentario()">Enviar comentario</button>
-  </div>
+  
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -100,6 +121,12 @@
   <script src="js/product-info.js"></script>
   <script src="https://kit.fontawesome.com/6d95d80ecd.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="js/logout.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+  <script>
+    let usuario = JSON.parse(localStorage.getItem("usuario"));
+    document.getElementById('nombre').innerHTML= "<img src=" + usuario.imagen + " width=30>  " + usuario.nombre;
+</script>
 </body>
 
 </html>
