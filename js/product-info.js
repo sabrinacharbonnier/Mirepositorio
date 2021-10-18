@@ -58,7 +58,7 @@ return estrellas;
 
 //Funciona para mostrar productos relacionados//
 function mostrarRelacionados(array){
-    relacionados = "";
+    let relacionados = "";
     infoProductos.relatedProducts.forEach((relacionado) => {
         relacionados +=`
         <div class="col-lg-3 col-md-4 col-6">
