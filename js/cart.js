@@ -23,7 +23,7 @@ function subtotal (i, valor){
 }
 
 function sumar(){
-    let precios = document.getElementsByClassName('precio'); //Array de TD con los precios
+    let precios = document.getElementsByClassName('precio');
 
     let cantidades = document.getElementsByTagName('input');
 
@@ -35,8 +35,6 @@ function sumar(){
         total+= parseFloat(precios[i].innerHTML);
       
         subtotal+= parseFloat(precios[i].innerHTML) * parseFloat(cantidades[i].value);
-
-        document.getElementById('res'+i).innerHTML = parseFloat(precios[i].innerHTML) * parseFloat(cantidades[i].value);
     }
     document.getElementById('sumaTotal').innerHTML=(total).toFixed(2);
     document.getElementById('subtotal').innerHTML=(subtotal).toFixed(2);

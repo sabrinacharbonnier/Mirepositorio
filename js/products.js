@@ -18,20 +18,17 @@ function showProductsList(array){
     
         if (product.cost >= minimo && product.cost <= maximo){
     htmlContentToAppend += `
-    <div class = "list-group-item list-group-item-action">
-        <div class="row">
-            <div class="col-3">
-                <img src= "` + product.imgSrc + `" alt= "` + product.description + `" class="img-thumbnail">  
-            </div>
-            <div class="col">
-                <div class="d-flex w-100 justify-content-between">
-                    <h4 class="mb-1">` + product.name  + " - U$S " + product.cost + `</h4>
-                    <small class="text-muted">` + product.soldCount + ` articulos</small>
-                </div> 
-                <p class="mb-1">` + product.description +`</p>
-            </div>
-        </div>
-    </div>`
+        
+    <div class="col-md-4">
+        <a href="product-info.html" class="card mb-4 shadow-sm custom-card">
+                    <img class="bd-placeholder-img card-img-top" src= "` + product.imgSrc + `">
+                    <h3 class="m-3"> ` + product.name + ' - <br> ' + product.currency + ' ' + product.cost + `" </h3> 
+                    <div class="card-body">
+                        <p class="card-text">` + product.description +`</p>
+                        <small class="text-muted">` + product.soldCount + ` articulos</small>
+                    </div>
+                </a>
+            </div>`
     document.getElementById("productos").innerHTML = htmlContentToAppend;  
     }
 }
@@ -80,8 +77,19 @@ document.getElementById("clearRangeFilter").addEventListener("click", function()
     showProductsList();
 });
 
+function buscador(){
+    let textoEscrito = document.getElementById("textobuscado").value;
+    let listaFiltrada = productsArray.filter(product => {
+        return product.name.toLowerCase().indexOf(textoEscrito.toLowerCase()) > -1;
+})
+ showProductsList(listaFiltrada);
+} 
+
 //Redireccionar a la página de información del producto
 document.getElementById("info-productos").addEventListener("click", function(){
     location.href = "product-info.html"
 });
 
+document.getElementById("textobuscado").addEventListener("keyup", () => {
+    buscador();
+}); 
