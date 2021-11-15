@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
     document.getElementById("goldradio").addEventListener("change", function(){
-        comissionPercentage = 0.13;
+        comissionPercentage = 0.15;
         updateTotalCosts();
     });
     

@@ -77,7 +77,72 @@
           </thead>
           <tbody id="unCarrito"></tbody>
         </table>
+        
       <br>
+      <hr class="mb-4">
+      <h5 class="mb-3">Dirección</h5>
+      <div class="row">
+        <div class="col-md-7 mb-3">
+        <label for="state">Departamento</label>
+        <select class="custom-select d-block w-100" id="departamento">
+          <option value="">Elija el departamento...</option>
+          <option>Artigas</option>
+          <option>Canelones</option>
+          <option>Cerro Largo</option>
+          <option>Colonia</option>
+          <option>Durazno</option>
+          <option>Flores</option>
+          <option>Florida</option>
+          <option>Lavalleja</option>
+          <option>Maldonado</option>
+          <option>Montevideo</option>
+          <option>Paysandú</option>
+          <option>Río Negro</option>
+          <option>Rivera</option>
+          <option>Rocha</option>
+          <option>Salto</option>
+          <option>San José</option>
+          <option>Soriano</option>
+          <option>Tacuarembó</option>
+          <option>Treinta y Tres</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="city">Ciudad</label>
+        <input type="text" class="form-control" id="ciudad" placeholder="Ingrese una ciudad" value="">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        <label for="street">Calle</label>
+        <input type="text" class="form-control" id="calle" placeholder="Ingrese una calle" required="">
+      </div>
+      <div class="col-md-4 mb-3">
+          <label for="number">Número</label>
+          <input type="number" class="form-control" id="numero" placeholder="Ingrese un número" required="" min="0">
+        </div>
+    </div>
+    <hr class="mb-4">
+    <h5 class="mb-3">Tipo de envío</h5>
+      <div class="d-block my-3">
+        <div class="custom-control custom-radio">
+          <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
+          <label class="custom-control-label" for="premiumradio">Premium (15%)</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="expressradio" name="publicationType" type="radio" class="custom-control-input" required="">
+          <label class="custom-control-label" for="expressradio">Express (7%)</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input id="estandardradio" name="publicationType" type="radio" class="custom-control-input" required="">
+          <label class="custom-control-label" for="estandardradio">Estándar (5%)</label>
+        </div>
+        <div class="row">
+          <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#contidionsModal">Ver detalles</button>
+        </div>
+      </div>
       <hr class="mb-4">
       <h5 class="mb-3">Costos</h5>
               <ul class="list-group mb-3">
@@ -93,14 +158,17 @@
                       <h6 class="my-0">Costo de envío</h6>
                       <small class="text-muted">Según el tipo de envío</small>
                     </div>
-                    <span class="text-muted" id="comissionText">-</span>
+                    <span class="text-muted" id="comision">-</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between">
                     <span>Total ($)</span>
                     <span id="sumaTotal"></span>
                   </li>
                 </ul>
-      <hr class="mb-4">   
+      <hr class="mb-4"> 
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Forma de pago</button>  
+      <button type="button" class="btn btn-primary" onclick="sumar()">Vender</button>
     </div>
   </div> 
   <footer class="text-muted">
@@ -112,6 +180,84 @@
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div><div></div><div></div><div></div>
+    </div>
+  </div>
+
+<!-- Modal forma de pago -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Forma de pago</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="custom-control custom-radio">
+          <input id="tarjeta" name="publicationType" type="radio" class="custom-control-input" required="">
+          <label class="custom-control-label" for="premiumradio">Tarjeta de crédito</label>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label for="cardNumber">Número de tarjeta</label>
+            <input type="text" class="form-control" id="numerotarjeta" placeholder="" value="" >
+          </div>
+          <div class="col-md-4">
+            <label for="cvv">Código de seguridad</label>
+            <input type="text" class="form-control" id="securitynumber" placeholder="" value="" >
+          </div>
+        </div>
+        <label for="expiration-date">Vencimiento (MM/AA)</label>
+        <input type="text" class="form-control" id="vencimiento" placeholder="" value="" >      
+        <br>
+        <div class="custom-control custom-radio">
+          <input id="transferencia" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
+          <label class="custom-control-label" for="premiumradio">Transferencia bancaria</label>
+        </div>
+        <div>
+          <label for="productName">Número de cuenta</label>
+          <input type="text" class="form-control" id="productName" placeholder="" value="" >
+        </div>    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal detalle de envío -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detalles de envío</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+              <div class="row">
+                  <h5 class="text-warning">Premium (15%)</h5>
+                  <p class="muted text-justify">Tu compra será enviada a tu dirección en 2 a 5 días luego de realizada la compra.</p>
+              </div>
+              <hr>
+              <div class="row">
+                  <h5 class="text-primary">Express (7%)</h5>
+                  <p class="muted text-justify">Tu compra será enviada a tu dirección en 5 a 8 días luego de realizada la compra.</p>
+              </div>
+              <hr>
+              <div class="row">
+                  <h5 class="text-secondary">Standard (5%)</h5>
+                  <p class="muted text-justify">Tu compra será enviada a tu dirección en 12 a 15 días luego de realizada la compra.</p>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
     </div>
   </div>
   <script src="js/jquery-3.4.1.min.js"></script>

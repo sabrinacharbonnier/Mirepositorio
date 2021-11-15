@@ -1,4 +1,5 @@
 let carritoArray = {};
+let porcentajeEnvio = 0.15;
 
 function mostrarCarritoInfo(){
     let carrito = "";
@@ -24,21 +25,22 @@ function subtotal (i, valor){
 
 function sumar(){
     let precios = document.getElementsByClassName('precio');
-
     let cantidades = document.getElementsByTagName('input');
 
     let total=0;
-    let subtotal=0;
+    let subtotal1=0;
+    let costoComision=0;  
 
     for (let i=0; i< precios.length; i++){
 
-        total+= parseFloat(precios[i].innerHTML);
-      
-        subtotal+= parseFloat(precios[i].innerHTML) * parseFloat(cantidades[i].value);
+        costoComision+= (parseFloat(precios[i].innerHTML) * parseFloat(cantidades[i].value))* porcentajeEnvio;
+        subtotal1+= parseFloat(precios[i].innerHTML) * parseFloat(cantidades[i].value);
+        total+= subtotal1 + costoComision;
     }
     document.getElementById('sumaTotal').innerHTML=(total).toFixed(2);
-    document.getElementById('subtotal').innerHTML=(subtotal).toFixed(2);
-}
+    document.getElementById('subtotal').innerHTML=(subtotal1).toFixed(2);
+    document.getElementById("comision").innerHTML=(costoComision).toFixed(2)
+} 
 
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
@@ -50,5 +52,25 @@ document.addEventListener("DOMContentLoaded", function(e){
             carritoArray = resultObj.data;
             mostrarCarritoInfo(carritoArray);
         }
+    });
+
+    document.getElementById("subtotal").addEventListener("change", function(){
+        subtotal1 = this.value;
+        sumar();
+    });
+
+    document.getElementById("premiumradio").addEventListener("change", function(){
+        porcentajeEnvio = 0.15;
+        sumar();
+    });
+
+    document.getElementById("expressradio").addEventListener("change", function(){
+        porcentajeEnvio = 0.07;
+        sumar();
+    });
+
+    document.getElementById("estandardradio").addEventListener("change", function(){
+        porcentajeEnvio = 0.05;
+        sumar();
     });
 });
