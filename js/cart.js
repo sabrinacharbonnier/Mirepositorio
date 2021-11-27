@@ -13,7 +13,7 @@ function mostrarCarritoInfo(){
         }
     
         carrito += 
-        '<tr><td><img class="img-fluid img-thumbnail" src="' + article.src + '"></td><td>' + article.name + ' </td><td class="precio">' + article.unitCost + '</td><td><div class="col-md-3 mb-3"><input type="number" required="" value="' + article.count + '" min="0" onchange="subtotal('+ i +', value)"></div></div></td><td>' + article.currency + '' + article.unitCost*article.count + ' </td></tr></table>'
+        '<tr><td><img class="img-fluid img-thumbnail" src="' + article.src + '"></td><td>' + article.name + ' </td><td class="precio">' + article.unitCost + '</td><td><div class="col-md-3 mb-3"><input type="number" required="" value="' + article.count + '" min="0" onchange="subtotal('+ i +', value)"></div></div></td><td>' + article.currency + '' + article.unitCost*article.count + ' </td><td><button class="btn btn-secondary" onclick="eliminar('+ i +')"><i class="bi bi-trash"></i></td></tr></table>'
     }
     document.getElementById("unCarrito").innerHTML = carrito;
 }
@@ -41,7 +41,11 @@ function sumar(){
     document.getElementById('subtotal').innerHTML=(subtotal1).toFixed(2);
     document.getElementById("comision").innerHTML=(costoComision).toFixed(2)
 } 
-
+function eliminar(i){
+    carritoArray.articles.splice(i,1);
+    mostrarCarritoInfo();
+    sumar();
+}
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
