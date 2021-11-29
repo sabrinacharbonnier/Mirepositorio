@@ -80,11 +80,12 @@
         
       <br>
       <hr class="mb-4">
+      <form action="http://localhost:3000/datos" method="post">
       <h5 class="mb-3">Dirección</h5>
       <div class="row">
         <div class="col-md-7 mb-3">
         <label for="state">Departamento</label>
-        <select class="custom-select d-block w-100" id="departamento">
+        <select class="custom-select d-block w-100" name="departamento" id="departamento">
           <option value="">Elija el departamento...</option>
           <option>Artigas</option>
           <option>Canelones</option>
@@ -111,32 +112,32 @@
     <div class="row">
       <div class="col-md-6 mb-3">
         <label for="city">Ciudad</label>
-        <input type="text" class="form-control" id="ciudad" placeholder="Ingrese una ciudad" value="">
+        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ingrese una ciudad" value="">
       </div>
     </div>
     <div class="row">
       <div class="col-md-3 mb-3">
         <label for="street">Calle</label>
-        <input type="text" class="form-control" id="calle" placeholder="Ingrese una calle" required="">
+        <input type="text" name="calle" class="form-control" id="calle" placeholder="Ingrese una calle" required="">
       </div>
       <div class="col-md-4 mb-3">
           <label for="number">Número</label>
-          <input type="number" class="form-control" id="numero" placeholder="Ingrese un número" required="" min="0">
+          <input type="number" name="numero" class="form-control" id="numero" placeholder="Ingrese un número" required="" min="0">
         </div>
     </div>
     <hr class="mb-4">
     <h5 class="mb-3">Tipo de envío</h5>
       <div class="d-block my-3">
         <div class="custom-control custom-radio">
-          <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
+          <input id="premiumradio" name="tipoEnvio" type="radio" class="custom-control-input" checked="" required="">
           <label class="custom-control-label" for="premiumradio">Premium (15%)</label>
         </div>
         <div class="custom-control custom-radio">
-          <input id="expressradio" name="publicationType" type="radio" class="custom-control-input" required="">
+          <input id="expressradio" name="tipoEnvio" type="radio" class="custom-control-input" required="">
           <label class="custom-control-label" for="expressradio">Express (7%)</label>
         </div>
         <div class="custom-control custom-radio">
-          <input id="estandardradio" name="publicationType" type="radio" class="custom-control-input" required="">
+          <input id="estandardradio" name="tipoEnvio" type="radio" class="custom-control-input" required="">
           <label class="custom-control-label" for="estandardradio">Estándar (5%)</label>
         </div>
         <div class="row">
@@ -168,9 +169,10 @@
       <hr class="mb-4"> 
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Forma de pago</button>  
-      <button type="button" class="btn btn-primary" onclick="sumar()">Agregar <i class="bi bi-cart3"></i></button>
+      <button type="submit" class="btn btn-primary" onclick="sumar()">Comprar <i class="bi bi-cart3"></i></button>
     </div>
   </div> 
+</form>
   <footer class="text-muted">
     <div class="container">
         <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>

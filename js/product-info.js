@@ -39,20 +39,14 @@ function mostrarComentarios(comentarios){
 
 //función para calificar
 function calificar(num){
-  
     let estrellas = "";
-
     for (let i=1; i<=5; i++){
-
         if (i<=num ){ 
-
             estrellas += '<i class="fas fa-star "></i>';
-            
         }else {
             estrellas +='<i class="far fa-star "></i>';
         }
     }
-    
 return estrellas;
 }
 
@@ -66,13 +60,11 @@ function mostrarRelacionados(array){
                 <h5>${array[relacionado].name}</h5>
                 <img class="img-fluid img-thumbnail" src="` + array[relacionado].imgSrc + `" alt="">
                 <small class = "text">` + array[relacionado].description +`</small>
-
             </div>
         </div>`
 });
 document.getElementById("relatedProduct").innerHTML = relacionados;
 }
-
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los

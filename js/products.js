@@ -1,4 +1,5 @@
 var productsArray = [];
+
 function showProductsList(array){
     if(array==undefined){
         array=productsArray;
@@ -54,9 +55,19 @@ function ordenarRelevante(forma){
             return b.soldCount - a.soldCount;
     });
 } showProductsList(productsArray)
-}  
+} 
 
+function buscar(){
+    let peticion = document.getElementById("buscar").value;
+    let buscados = productsArray.filter(producto => {
+        return producto.name.toLowerCase().indexOf(peticion.toLowerCase())>-1;
+})
+ showProductsList(buscados);
+}
 
+//Función que se ejecuta una vez se haya lanzado el evento de
+//que el documento se encuentra cargado, es decir, se encuentran todos los
+//elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(PRODUCTS_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
@@ -65,7 +76,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
     });
 }); 
-
+document.getElementById("buscar").addEventListener("keyup",() => {
+    buscar();
+}); 
 
 document.getElementById("clearRangeFilter").addEventListener("click", function(){
     document.getElementById("minimo").value = "";
@@ -77,19 +90,7 @@ document.getElementById("clearRangeFilter").addEventListener("click", function()
     showProductsList();
 });
 
-function buscador(){
-    let textoEscrito = document.getElementById("textobuscado").value;
-    let listaFiltrada = productsArray.filter(product => {
-        return product.name.toLowerCase().indexOf(textoEscrito.toLowerCase()) > -1;
-})
- showProductsList(listaFiltrada);
-} 
-
 //Redireccionar a la página de información del producto
 document.getElementById("info-productos").addEventListener("click", function(){
     location.href = "product-info.html"
 });
-
-document.getElementById("textobuscado").addEventListener("keyup", () => {
-    buscador();
-}); 
